@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import requests
 
-from config import token
+from config_person1 import token
 
 
 # 根据项目id获取所有场次和在售状态
@@ -334,5 +336,20 @@ def create_order(show_id, session_id, seat_plan_id, price: int, qty: int, delive
     response = requests.post(url=url, headers=headers, json=data).json()
     if response["statusCode"] == 200:
         print("下单成功！请尽快支付！")
+        sendWeMessage()
     else:
         raise Exception("下单异常:" + str(response))
+
+
+def sendWeMessage():
+    token = '58678bb0c95d4327bfb46cde0872b771'  # 在pushplus网站中可以找到
+    title = '票星球-抢票成功'  # 改成你要的标题内容
+    content = '快去支付!!'  # 改成你要的正文内容
+    url = 'http://www.pushplus.plus/send?token=' + token + '&title=' + title + '&content=' + content
+    print(url)
+    requests.get(url)
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+   sendWeMessage()

@@ -1,18 +1,18 @@
+
 import request
-import config
+import config_person2
 
 '''
 目前仅支持【无需选座】的项目
 '''
-show_id = config.show_id
-session_id = config.session_id
-buy_count = config.buy_count
-audience_idx = config.audience_idx
-deliver_method = config.deliver_method
-seat_plan_id = ''
+show_id = config_person2.show_id
+session_id = config_person2.session_id
+buy_count = config_person2.buy_count
+audience_idx = config_person2.audience_idx
+deliver_method = config_person2.deliver_method
+seat_plan_id = config_person2.seat_plan_id
 session_id_exclude = []  # 被排除掉的场次
 price = 0
-
 while True:
     try:
         # 如果没有指定场次，则默认从第一场开始刷
@@ -29,7 +29,7 @@ while True:
                     if session_id:
                         break
                     else:
-                        print("未获取到在售状态且符合购票数量需求的session_id")
+                        print("未获取到在售状态且符合购票数量需求的场次")
                         session_id_exclude = []  # 再给自己一次机会，万一被排除掉的场次又放票了呢
         # 获取座位余票信息，默认从最低价开始
         seat_plans = request.get_seat_plans(show_id, session_id)
@@ -46,14 +46,14 @@ while True:
                 break
         # 如果没有拿到seat_plan_id，说明该场次所有座位的余票都不满足购票数量需求，就重新开始刷下一场次
         if not seat_plan_id:
-            print("该场次" + session_id + "没有符合条件的座位，将为你继续搜寻其他在售场次")
+            print("该场次 " + session_id + " 没有符合条件的座位，将为你继续搜寻其他在售场次")
             session_id_exclude.append(session_id)  # 排除掉这个场次
             session_id = ''
             continue
 
         if not deliver_method:
             deliver_method = request.get_deliver_method(show_id, session_id, seat_plan_id, price, buy_count)
-        print("deliver_method:" + deliver_method)
+        print("deliver_method: " + deliver_method)
 
         if deliver_method == "VENUE_E":
             request.create_order(show_id, session_id, seat_plan_id, price, buy_count, deliver_method, 0, None,
@@ -73,6 +73,9 @@ while True:
                 receiver = address["username"]  # 收件人
                 cellphone = address["cellphone"]  # 电话
                 detail_address = address["detailAddress"]  # 详细地址
+                print("receiver: " + receiver)
+                print("cellphone: " + cellphone)
+                print("detail_address: " + detail_address)
 
                 # 获取快递费用
                 express_fee = request.get_express_fee(show_id, session_id, seat_plan_id, price, buy_count,
