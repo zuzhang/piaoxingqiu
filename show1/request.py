@@ -11,7 +11,7 @@ def get_sessions(show_id) -> list | None:
         'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Mobile Safari/537.36',
         'Content-Type': 'application/json'
     }
-    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/show/pub/v3/show/" + show_id + "/sessions_dynamic_data"
+    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/show/pub/v3/show/" + show_id + "/sessions_dynamic_data?src=WEB&channelId=&terminalSrc=WEB"
     response = requests.get(url=url, headers=headers).json()
     if response["statusCode"] == 200:
         return response["data"]["sessionVOs"]
@@ -26,7 +26,7 @@ def get_seat_plans(show_id, session_id) -> list:
         'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Mobile Safari/537.36',
         'Content-Type': 'application/json'
     }
-    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/show/pub/v3/show/" + show_id + "/show_session/" + session_id + "/seat_plans_static_data"
+    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/show/pub/v3/show/" + show_id + "/show_session/" + session_id + "/seat_plans_static_data?src=WEB&channelId=&terminalSrc=WEB"
     response = requests.get(url=url, headers=headers).json()
     if response["statusCode"] == 200:
         return response["data"]["seatPlans"]
@@ -40,7 +40,7 @@ def get_seat_count(show_id, session_id) -> list:
         'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Mobile Safari/537.36',
         'Content-Type': 'application/json'
     }
-    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/show/pub/v3/show/" + show_id + "/show_session/" + session_id + "/seat_plans_dynamic_data"
+    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/show/pub/v3/show/" + show_id + "/show_session/" + session_id + "/seat_plans_dynamic_data?src=WEB&channelId=&terminalSrc=WEB"
     response = requests.get(url=url, headers=headers).json()
     if response["statusCode"] == 200:
         return response["data"]["seatPlans"]
@@ -76,7 +76,7 @@ def get_deliver_method(show_id, session_id, seat_plan_id, price: int, qty: int) 
             }
         ]
     }
-    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/trade/buyer/order/v3/pre_order"
+    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/trade/buyer/order/v3/pre_order?src=WEB&channelId=&terminalSrc=WEB"
     response = requests.post(url=url, headers=headers, json=data).json()
     if response["statusCode"] == 200:
         return response["data"]["supportDeliveries"][0]["name"]
@@ -91,7 +91,7 @@ def get_audiences() -> list | None:
         'Content-Type': 'application/json',
         'access-token': token
     }
-    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/user/buyer/v3/user_audiences"
+    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/user/buyer/v3/user_audiences?src=WEB&channelId=&terminalSrc=WEB"
     response = requests.get(url=url, headers=headers).json()
     if response["statusCode"] == 200:
         return response["data"]
@@ -107,7 +107,7 @@ def get_address() -> dict | None:
         'Content-Type': 'application/json',
         'access-token': token
     }
-    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/user/buyer/v3/user/addresses/default"
+    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/user/buyer/v3/user/addresses/default?src=WEB&channelId=&terminalSrc=WEB"
     response = requests.get(url=url, headers=headers).json()
     if response["statusCode"] == 200:
         return response["data"]
@@ -146,7 +146,7 @@ def get_express_fee(show_id, session_id, seat_plan_id, price: int, qty: int, loc
         ],
         "locationCityId": location_city_id  # 460102
     }
-    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/trade/buyer/order/v3/price_items"
+    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/trade/buyer/order/v3/price_items?src=WEB&channelId=&terminalSrc=WEB"
     response = requests.post(url=url, headers=headers, json=data).json()
     if response["statusCode"] == 200:
         return response["data"][0]
@@ -332,7 +332,7 @@ def create_order(show_id, session_id, seat_plan_id, price: int, qty: int, delive
     else:
         raise Exception("不支持的deliver_method:" + str(deliver_method))
 
-    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/trade/buyer/order/v3/create_order"
+    url = "https://m.piaoxingqiu.com/cyy_gatewayapi/trade/buyer/order/v3/create_order?src=WEB&channelId=&terminalSrc=WEB"
     response = requests.post(url=url, headers=headers, json=data).json()
     if response["statusCode"] == 200:
         print("下单成功！请尽快支付！")
