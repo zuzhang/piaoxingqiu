@@ -1,13 +1,16 @@
 # 输入自己的token
-token = 'eyJ0eXAiOiJKV1QiLCJjdHkiOiJKV1QiLCJ6aXAiOiJERUYiLCJhbGciOiJSUzUxMiJ9.eNqEkM1qwzAQhN9lzz5IsqwfHxNSGkgohOTQU1GsNTHYUpDl0Dbk3SOjpvTUHHeYb2dnr-DNFE9r13qo3dT3BUwjhjxf4dh9L71FqOHldfOxhQLG6bj4FQUT0iiCaBlVFWdSiZZyzZMvkTvfz6bF4X21S8oQm8O82s4g1yXl1JLKypYRQiiKylSYwSc2QeBWAH6eu4D7bsDH4Yl8O2Mw0f8b0qaQJqCJPzAVSisqS6YFFang1xhxyAXz3gFDczIu_n1SSs-kJqVkuoALhrHzDmqeP-jM47DbHQAA__8.M1ZqShqRtPP_F3ACLXYhJpDjwFyxwNPYP5Uq2QoaI2LyjjdbM4wMC1DHkTWbgEJPjilUIawfWcX0v-dDPCKnK8LM2P6eyrEjKUkMPXfE_cbBOKmPHBai1ZOMH4-2bl8c0-hZHl5mkQqIhd_abkM9dwdJmKohFPyMjVFoHHP24Vo'
+token = ''
 # 项目id，必填
-# 伍佰
-show_id = '6438d4bbdbb44f0001ef5a06'
+show_id = '6438d4bbdbb44f0001ef5a06' # 周杰伦
 
 # 指定场次id，不指定则默认从第一场开始遍历
-session_id = ''  # 伍佰
+session_id = '6438d4e2532bff0001072d8d' # 周四
+# session_id = '6438d4e2532bff0001072d8f' # 周五
+# session_id = '6438d4e2532bff0001072d91' # 周六
+# session_id = '6438d4e2532bff0001072d93' # 周日
 
 # 指定价格, 不指定则默认价格不限
+# https://m.piaoxingqiu.com/cyy_gatewayapi/show/pub/v3/show/6438d4bbdbb44f0001ef5a06/show_session/6438d4e2532bff0001072d8d/seat_plans_from_marketing_countdown?src=WEB&channelId=&terminalSrc=WEB
 seat_plan_id=''
 # 购票数量，一定要看购票须知，不要超过上限
 buy_count = 2
