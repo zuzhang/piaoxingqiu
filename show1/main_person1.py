@@ -48,7 +48,7 @@ while True:
         if not seat_plan_id:
             print("该场次 " + session_id + " 没有符合条件的座位，将为你继续搜寻其他在售场次")
             session_id_exclude.append(session_id)  # 排除掉这个场次
-            session_id = config_person1.session_id
+            session_id = ''
             continue
 
         if not deliver_method:
@@ -94,5 +94,5 @@ while True:
     except Exception as e:
         print(e)
         session_id_exclude.append(session_id)  # 排除掉这个场次
-        session_id = config_person1.session_id
+        session_id = ''
 
